@@ -1,8 +1,22 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
+@import "@fortawesome/fontawesome-free/css/all.css";
 
 // Variables
 @import 'variables';
 
+//Functions
+@import 'bootstrap/scss/functions';
+
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+//fonts
+@font-face {
+    font-family: 'Bebas Neue';
+    src:
+    url('/public/fonts/bebasneue/BebasNeue-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

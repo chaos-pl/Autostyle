@@ -1,93 +1,185 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-2 d-none d-md-block bg-dark sidebar vh-100">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column text-white">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Ventas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Configuración</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <!-- Contenido principal -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                </div>
-
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <div class="row g-4">
-                    <div class="col-md-3">
-                        <div class="card text-white bg-primary">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Usuarios</h5>
-                                <p class="card-text fs-3">1,250</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card text-white bg-success">
-                            <div class="card-body">
-                                <h5 class="card-title">Ventas Hoy</h5>
-                                <p class="card-text fs-3">$5,400</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card text-white bg-warning">
-                            <div class="card-body">
-                                <h5 class="card-title">Productos</h5>
-                                <p class="card-text fs-3">320</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card text-white bg-danger">
-                            <div class="card-body">
-                                <h5 class="card-title">Pendientes</h5>
-                                <p class="card-text fs-3">15</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <p>Bienvenido al panel de control.</p>
-            </main>
-        </div>
-    </div>
-
     <style>
-        .sidebar {
-            background-color: #343a40;
+        @font-face {
+            font-family: 'Bebas Neue';
+            src: url('{{ asset('fonts/bebasneue/BebasNeue-Regular.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
-        .sidebar .nav-link:hover {
-            background-color: #495057;
-            color: white !important;
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #ffffff;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .text-shadow-black {
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(to bottom, #cc0000, #800000);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            border-left: 5px solid #fff;
+            background-color: #8a0707;
+            transform: scale(1.03);
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background-color: #fff;
+            color: #e60000;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .stats-panel {
+            width: 300px;
+            background: linear-gradient(to bottom, #cc0000, #800000);
+            color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .stats-panel h4 {
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .stat-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #8a0707;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .sidebar .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .brand:hover {
+            transform: scale(1.03);
+        }
+
+        .sidebar .brand img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .sidebar .brand span {
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px #000;
         }
     </style>
-@endsection
 
+    <div class="dashboard-container">
+        <div class="sidebar d-flex flex-column">
+            <div class="brand">
+                <img src="{{ asset('img/logo_autostyle.jpeg') }}" alt="Logo">
+                <span class="text-shadow-black">AUTOSTYLE</span>
+            </div>
+
+            <div>
+                <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
+                    <i class="fa-solid fa-home me-2 text-shadow-black"></i>
+                    <span class="text-shadow-black">INICIO</span>
+                </a>
+                <a href="/productos" class="{{ request()->is('productos') ? 'active' : '' }}">
+                    <i class="fa-solid fa-box me-2 text-shadow-black"></i>
+                    <span class="text-shadow-black">PRODUCTOS</span>
+                </a>
+                <a href="/empleados" class="{{ request()->is('empleados') ? 'active' : '' }}">
+                    <i class="fa-solid fa-users me-2 text-shadow-black"></i>
+                    <span class="text-shadow-black">EMPLEADOS</span>
+                </a>
+                <a href="/proveedores" class="{{ request()->is('proveedores') ? 'active' : '' }}">
+                    <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
+                    <span class="text-shadow-black">PROVEEDORES</span>
+                </a>
+            </div>
+
+            <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
+                <i class="fa-solid fa-arrow-left me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">SALIR</span>
+            </a>
+        </div>
+
+        <div class="content">
+            <h2 class="fw-bold ">Bienvenido al Dashboard</h2>
+            <p>Contenido de la vista actual...</p>
+        </div>
+
+        <div class="stats-panel">
+            <h4 class="text-shadow-black">Estadísticas</h4>
+
+            <div class="stat-item d-flex align-items-center gap-3">
+                <i class="fa-solid fa-sack-dollar fa-2x text-white text-shadow-black"></i>
+                <div>
+                    <h5 class="mb-0 text-white text-shadow-black">Ventas Totales</h5>
+                    <p class="mb-0 text-white text-shadow-black">$75,000</p>
+                </div>
+            </div>
+
+            <div class="stat-item d-flex align-items-center gap-3">
+                <i class="fa-solid fa-warehouse fa-2x text-white text-shadow-black"></i>
+                <div>
+                    <h5 class="mb-0 text-white text-shadow-black">Almacén</h5>
+                    <p class="mb-0 text-white text-shadow-black">65%</p>
+                </div>
+            </div>
+
+            <div class="stat-item d-flex align-items-center gap-3">
+                <i class="fa-solid fa-user-check fa-2x text-white text-shadow-black"></i>
+                <div>
+                    <h5 class="mb-0 text-white text-shadow-black">Clientes Activos</h5>
+                    <p class="mb-0 text-white text-shadow-black">1,230</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

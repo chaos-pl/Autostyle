@@ -8,6 +8,7 @@
             src: url('{{ asset('fonts/bebasneue/BebasNeue-Regular.ttf') }}') format('truetype');
             font-weight: normal;
             font-style: normal;
+
         }
 
         body {
@@ -64,6 +65,7 @@
             bottom: 20%;
         }
     </style>
+
 
     <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #000;">
         <div class="container-fluid px-4">

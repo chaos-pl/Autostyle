@@ -80,21 +80,35 @@
                                     <i class="fa-solid fa-user-circle"></i> {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
+
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        <i class="fa-solid fa-gauge-high"></i> DashBoard
+                                    </a>
+
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
                                 </div>
+
                             </li>
+
                         @endguest
+
                     </ul>
+
                 </div>
 
             </div>
+
         </div>
+
     </nav>
 
 

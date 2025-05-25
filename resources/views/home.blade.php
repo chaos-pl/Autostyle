@@ -142,7 +142,7 @@
                     <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">PROVEEDORES</span>
                 </a>
-                <a href="/categorias" class="{{ request()->is('categorias') ? 'active' : '' }}">
+                <a href="{{ route('categorias.index') }}" class="{{ request()->is('categorias') ? 'active' : '' }}">
                     <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">CATEGORÍAS</span>
                 </a>

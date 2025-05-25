@@ -66,6 +66,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
+
         .stats-panel {
             width: 300px;
             background: linear-gradient(to bottom, #cc0000, #800000);
@@ -141,6 +142,11 @@
                     <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">PROVEEDORES</span>
                 </a>
+                <a href="/categorias" class="{{ request()->is('categorias') ? 'active' : '' }}">
+                    <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
+                    <span class="text-shadow-black">CATEGORÍAS</span>
+                </a>
+
             </div>
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">

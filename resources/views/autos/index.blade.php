@@ -66,7 +66,6 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-
         .stats-panel {
             width: 300px;
             background: linear-gradient(to bottom, #cc0000, #800000);
@@ -116,9 +115,21 @@
             letter-spacing: 1px;
             text-shadow: 1px 1px 3px #000;
         }
+
+        .auto-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .auto-card a {
+            margin-right: 10px;
+        }
     </style>
 
     <div class="dashboard-container">
+        <!-- SIDEBAR -->
         <div class="sidebar d-flex flex-column">
             <div class="brand">
                 <img src="{{ asset('img/logo_autostyle.jpeg') }}" alt="Logo">
@@ -142,15 +153,14 @@
                     <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">PROVEEDORES</span>
                 </a>
-                <a href="{{ route('categorias.index') }}" class="{{ request()->is('categorias') ? 'active' : '' }}">
+                <a href="/categorias" class="{{ request()->is('categorias') ? 'active' : '' }}">
                     <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">CATEGORÍAS</span>
                 </a>
                 <a href="/autos" class="{{ request()->is('autos') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">Autos</span>
+                    <i class="fa-solid fa-car me-2 text-shadow-black"></i>
+                    <span class="text-shadow-black">AUTOS</span>
                 </a>
-
             </div>
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
@@ -159,11 +169,31 @@
             </a>
         </div>
 
+        <!-- CONTENIDO PRINCIPAL -->
         <div class="content">
-            <h2 class="fw-bold ">Bienvenido al Dashboard</h2>
-            <p>Contenido de la vista actual...</p>
+            <h2 class="fw-bold">Lista de Autos</h2>
+
+            <a href="{{ route('autos.create') }}" class="btn btn-danger mb-3">Crear nuevo auto</a>
+
+            @foreach($autos as $auto)
+                <div class="auto-card">
+                    <p><strong>Marca:</strong> {{ $auto->marca }}</p>
+                    <p><strong>Modelo:</strong> {{ $auto->modelo }}</p>
+                    <p><strong>Año:</strong> {{ $auto->año }}</p>
+                    <p><strong>Cliente ID:</strong> {{ $auto->cliente_id }}</p>
+
+                    <a href="{{ route('autos.edit', $auto) }}" class="btn btn-sm btn-warning">Editar</a>
+
+                    <form action="{{ route('autos.destroy', $auto) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            @endforeach
         </div>
 
+        <!-- PANEL DE ESTADÍSTICAS -->
         <div class="stats-panel">
             <h4 class="text-shadow-black">Estadísticas</h4>
 

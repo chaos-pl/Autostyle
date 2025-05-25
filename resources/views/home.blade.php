@@ -164,6 +164,8 @@
             <p>Contenido de la vista actual...</p>
         </div>
 
+
+        <!-- PANEL DE ESTADÍSTICAS -->
         <div class="stats-panel">
             <h4 class="text-shadow-black">Estadísticas</h4>
 

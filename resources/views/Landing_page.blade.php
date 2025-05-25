@@ -109,7 +109,7 @@
         </div>
     </nav>
 
-    <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>

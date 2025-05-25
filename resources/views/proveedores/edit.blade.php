@@ -1,107 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('content')
-    {{-- Mantenemos los mismos estilos --}}
+@section('dashboard-content')
+    <div class="content">
+        <h2 class="fw-bold mb-4" style="color: #cc0000; text-shadow: 1px 1px 0 #000;">Editar Proveedor</h2>
 
-    <div class="dashboard-container">
-        <div class="sidebar d-flex flex-column">
-            <div class="brand">
-                <img src="{{ asset('img/logo_autostyle.jpeg') }}" alt="Logo">
-                <span class="text-shadow-black">AUTOSTYLE</span>
+        <form action="{{ route('proveedores.update', $proveedor) }}" method="POST"
+              style="background: #fff; padding: 30px; border-radius: 20px; border: 2px solid #cc0000;">
+            @csrf
+            @method('PUT')
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label fw-bold" style="color: #cc0000;">Nombre:</label>
+                <input type="text" name="nombre" id="nombre" value="{{ $proveedor->nombre }}" required class="form-control" style="border-radius: 10px;">
             </div>
 
-            <div>
-                <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
-                    <i class="fa-solid fa-home me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">INICIO</span>
-                </a>
-                <a href="/productos" class="{{ request()->is('productos') ? 'active' : '' }}">
-                    <i class="fa-solid fa-box me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">PRODUCTOS</span>
-                </a>
-                <a href="/empleados" class="{{ request()->is('empleados') ? 'active' : '' }}">
-                    <i class="fa-solid fa-users me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">EMPLEADOS</span>
-                </a>
-                <a href="/proveedores" class="{{ request()->is('proveedores') ? 'active' : '' }}">
-                    <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">PROVEEDORES</span>
-                </a>
-                <a href="/categorias" class="{{ request()->is('categorias') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">CATEGORÍAS</span>
-                </a>
-                <a href="/autos" class="{{ request()->is('autos') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">Autos</span>
-                </a>
+            <div class="mb-3">
+                <label for="telefono" class="form-label fw-bold" style="color: #cc0000;">Teléfono:</label>
+                <input type="text" name="telefono" id="telefono" value="{{ $proveedor->telefono }}" class="form-control" style="border-radius: 10px;">
             </div>
 
-            <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
-                <i class="fa-solid fa-arrow-left me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">SALIR</span>
-            </a>
-        </div>
-
-        <div class="content">
-            <h2 class="fw-bold">Editar Proveedor</h2>
-
-            <form action="{{ route('proveedores.update', $proveedor) }}" method="POST">
-                @csrf
-                @method('PUT')
-
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre" id="nombre" value="{{ $proveedor->nombre }}" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="telefono">Teléfono:</label>
-                    <input type="text" name="telefono" id="telefono" value="{{ $proveedor->telefono }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" name="email" id="email" value="{{ $proveedor->email }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" name="direccion" id="direccion" value="{{ $proveedor->direccion }}">
-                </div>
-
-                <div class="form-group">
-                    <button type="submit">Actualizar</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="stats-panel">
-            <h4 class="text-shadow-black">Estadísticas</h4>
-
-            <div class="stat-item d-flex align-items-center gap-3">
-                <i class="fa-solid fa-sack-dollar fa-2x text-white text-shadow-black"></i>
-                <div>
-                    <h5 class="mb-0 text-white text-shadow-black">Ventas Totales</h5>
-                    <p class="mb-0 text-white text-shadow-black">$75,000</p>
-                </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label fw-bold" style="color: #cc0000;">Correo electrónico:</label>
+                <input type="email" name="correo" id="correo" value="{{ $proveedor->correo }}" class="form-control" style="border-radius: 10px;">
             </div>
 
-            <div class="stat-item d-flex align-items-center gap-3">
-                <i class="fa-solid fa-warehouse fa-2x text-white text-shadow-black"></i>
-                <div>
-                    <h5 class="mb-0 text-white text-shadow-black">Almacén</h5>
-                    <p class="mb-0 text-white text-shadow-black">65%</p>
-                </div>
+            <div class="mb-4">
+                <label for="direccion" class="form-label fw-bold" style="color: #cc0000;">Dirección:</label>
+                <input type="text" name="direccion" id="direccion" value="{{ $proveedor->direccion }}" class="form-control" style="border-radius: 10px;">
             </div>
 
-            <div class="stat-item d-flex align-items-center gap-3">
-                <i class="fa-solid fa-user-check fa-2x text-white text-shadow-black"></i>
-                <div>
-                    <h5 class="mb-0 text-white text-shadow-black">Clientes Activos</h5>
-                    <p class="mb-0 text-white text-shadow-black">1,230</p>
-                </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-danger px-4 py-2" style="border-radius: 10px; font-weight: bold;">
+                    <i class="fa fa-save me-1"></i> Actualizar
+                </button>
             </div>
-        </div>
+        </form>
     </div>
 @endsection

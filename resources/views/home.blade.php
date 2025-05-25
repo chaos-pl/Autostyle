@@ -141,7 +141,7 @@
                     <i class="fa-solid fa-box me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">PRODUCTOS</span>
                 </a>
-                <a href="/empleados" class="{{ request()->is('empleados') ? 'active' : '' }}">
+                <a href="/empleados/index.blade" class="{{ request()->is('empleados') ? 'active' : '' }}">
                     <i class="fa-solid fa-users me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">EMPLEADOS</span>
                 </a>

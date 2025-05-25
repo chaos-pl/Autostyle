@@ -116,40 +116,20 @@
             text-shadow: 1px 1px 3px #000;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
+        .proveedor-card {
+            border: 1px solid #ddd;
+            padding: 15px;
             border-radius: 10px;
-            border: 1px solid #ccc;
+            margin-bottom: 15px;
         }
 
-        .form-group button {
-            background-color: #cc0000;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            transition: 0.3s ease;
-            cursor: pointer;
-        }
-
-        .form-group button:hover {
-            background-color: #8a0707;
+        .proveedor-card a {
+            margin-right: 10px;
         }
     </style>
 
     <div class="dashboard-container">
+        <!-- SIDEBAR -->
         <div class="sidebar d-flex flex-column">
             <div class="brand">
                 <img src="{{ asset('img/logo_autostyle.jpeg') }}" alt="Logo">
@@ -178,8 +158,8 @@
                     <span class="text-shadow-black">CATEGORÍAS</span>
                 </a>
                 <a href="/autos" class="{{ request()->is('autos') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">Autos</span>
+                    <i class="fa-solid fa-car me-2 text-shadow-black"></i>
+                    <span class="text-shadow-black">AUTOS</span>
                 </a>
             </div>
 
@@ -189,39 +169,31 @@
             </a>
         </div>
 
+        <!-- CONTENIDO PRINCIPAL -->
         <div class="content">
-            <h2 class="fw-bold">Editar Auto</h2>
+            <h2 class="fw-bold">Lista de Proveedores</h2>
 
-            <form action="{{ route('autos.update', $auto) }}" method="POST">
-                @csrf
-                @method('PUT')
+            <a href="{{ route('proveedores.create') }}" class="btn btn-danger mb-3">Crear nuevo proveedor</a>
 
-                <div class="form-group">
-                    <label for="cliente_id">Cliente ID:</label>
-                    <input type="number" name="cliente_id" id="cliente_id" value="{{ $auto->cliente_id }}" required>
+            @foreach($proveedores as $proveedor)
+                <div class="proveedor-card">
+                    <p><strong>Nombre:</strong> {{ $proveedor->nombre }}</p>
+                    <p><strong>Teléfono:</strong> {{ $proveedor->telefono ?? 'N/A' }}</p>
+                    <p><strong>Correo:</strong> {{ $proveedor->correo }}</p>
+                    <p><strong>Dirección:</strong> {{ $proveedor->direccion }}</p>
+
+                    <a href="{{ route('proveedores.edit', $proveedor) }}" class="btn btn-sm btn-warning">Editar</a>
+
+                    <form action="{{ route('proveedores.destroy', $proveedor) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
                 </div>
-
-                <div class="form-group">
-                    <label for="marca">Marca:</label>
-                    <input type="text" name="marca" id="marca" value="{{ $auto->marca }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" name="modelo" id="modelo" value="{{ $auto->modelo }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="año">Año:</label>
-                    <input type="number" name="año" id="año" value="{{ $auto->año }}">
-                </div>
-
-                <div class="form-group">
-                    <button type="submit">Actualizar</button>
-                </div>
-            </form>
+            @endforeach
         </div>
 
+        <!-- PANEL DE ESTADÍSTICAS -->
         <div class="stats-panel">
             <h4 class="text-shadow-black">Estadísticas</h4>
 

@@ -8,7 +8,6 @@
             src: url('{{ asset('fonts/bebasneue/BebasNeue-Regular.ttf') }}') format('truetype');
             font-weight: normal;
             font-style: normal;
-
         }
 
         body {
@@ -66,7 +65,6 @@
         }
     </style>
 
-
     <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #000;">
         <div class="container-fluid px-4">
             <div class="row w-100 align-items-center">
@@ -99,7 +97,7 @@
                 </div>
 
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a href="#horarios" class="text-decoration-none me-4" style="color: #ffffff;">
+                    <a href="#" class="text-decoration-none me-4" style="color: #ffffff;" data-bs-toggle="modal" data-bs-target="#horariosModal">
                         <i class="fa-solid fa-clock me-1"></i> Horarios
                     </a>
                     <a href="#carrito" class="text-decoration-none" style="color: #ffffff;">
@@ -111,7 +109,7 @@
         </div>
     </nav>
 
-    <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -179,4 +177,39 @@
             <a href="#" style="color: #e60000;">Twitter</a>
         </div>
     </footer>
+
+    <div class="modal fade" id="horariosModal" tabindex="-1" aria-labelledby="horariosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold bebas" id="horariosModalLabel">HORARIOS DE LA TIENDA</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body bg-light">
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0">
+                            <thead class="bg-secondary text-white">
+                            <tr>
+                                <th style="color: red">Día</th>
+                                <th style="color: red;">Horario</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="bg-light fw-bold">
+                                <td>Sábado</td>
+                                <td>8:00 AM - 9:30 PM</td>
+                            </tr>
+                            <tr><td>Domingo</td><td>8:00 AM - 9:00 PM</td></tr>
+                            <tr><td>Lunes</td><td>8:00 AM - 9:30 PM</td></tr>
+                            <tr><td>Martes</td><td>8:00 AM - 9:30 PM</td></tr>
+                            <tr><td>Miércoles</td><td>8:00 AM - 9:30 PM</td></tr>
+                            <tr><td>Jueves</td><td>8:00 AM - 9:30 PM</td></tr>
+                            <tr><td>Viernes</td><td>8:00 AM - 9:30 PM</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

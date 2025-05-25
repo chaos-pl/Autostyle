@@ -66,7 +66,6 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-
         .stats-panel {
             width: 300px;
             background: linear-gradient(to bottom, #cc0000, #800000);
@@ -116,6 +115,38 @@
             letter-spacing: 1px;
             text-shadow: 1px 1px 3px #000;
         }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group button {
+            background-color: #cc0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #8a0707;
+        }
     </style>
 
     <div class="dashboard-container">
@@ -142,7 +173,7 @@
                     <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">PROVEEDORES</span>
                 </a>
-                <a href="{{ route('categorias.index') }}" class="{{ request()->is('categorias') ? 'active' : '' }}">
+                <a href="/categorias" class="{{ request()->is('categorias') ? 'active' : '' }}">
                     <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">CATEGORÍAS</span>
                 </a>
@@ -150,7 +181,6 @@
                     <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">Autos</span>
                 </a>
-
             </div>
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
@@ -160,8 +190,36 @@
         </div>
 
         <div class="content">
-            <h2 class="fw-bold ">Bienvenido al Dashboard</h2>
-            <p>Contenido de la vista actual...</p>
+            <h2 class="fw-bold">Editar Auto</h2>
+
+            <form action="{{ route('autos.update', $auto) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="form-group">
+                    <label for="cliente_id">Cliente ID:</label>
+                    <input type="number" name="cliente_id" id="cliente_id" value="{{ $auto->cliente_id }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="marca">Marca:</label>
+                    <input type="text" name="marca" id="marca" value="{{ $auto->marca }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" name="modelo" id="modelo" value="{{ $auto->modelo }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="año">Año:</label>
+                    <input type="number" name="año" id="año" value="{{ $auto->año }}">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Actualizar</button>
+                </div>
+            </form>
         </div>
 
         <div class="stats-panel">

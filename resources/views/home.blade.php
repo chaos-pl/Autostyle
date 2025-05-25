@@ -9,6 +9,13 @@
             font-style: normal;
         }
 
+        .sidebar a.active {
+            background-color: #8a0707;
+            border-left: 5px solid #ffffff;
+            transform: scale(1.03);
+        }
+
+
         html, body {
             height: 100%;
             margin: 0;
@@ -126,7 +133,7 @@
             </div>
 
             <div>
-                <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
+                <a href="/home" class="{{ request()->is('inicio') ? 'active' : '' }}">
                     <i class="fa-solid fa-home me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">INICIO</span>
                 </a>
@@ -146,7 +153,7 @@
                     <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">CATEGORÍAS</span>
                 </a>
-                <a href="/autos" class="{{ request()->is('autos') ? 'active' : '' }}">
+                <a href="/autos" class="{{ request()->is('autos*') ? 'active' : '' }}">
                     <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">Autos</span>
                 </a>

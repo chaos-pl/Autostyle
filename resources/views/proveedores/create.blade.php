@@ -141,7 +141,6 @@
             border-radius: 10px;
             font-weight: bold;
             transition: 0.3s ease;
-            cursor: pointer;
         }
 
         .form-group button:hover {
@@ -190,34 +189,34 @@
         </div>
 
         <div class="content">
-            <h2 class="fw-bold">Editar Auto</h2>
+            <h2 class="fw-bold">Crear Proveedor</h2>
 
-            <form action="{{ route('autos.update', $auto) }}" method="POST">
+            <form action="{{ route('proveedores.store') }}" method="POST">
                 @csrf
-                @method('PUT')
 
                 <div class="form-group">
-                    <label for="cliente_id">Cliente ID:</label>
-                    <input type="number" name="cliente_id" id="cliente_id" value="{{ $auto->cliente_id }}" required>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" id="nombre" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="marca">Marca:</label>
-                    <input type="text" name="marca" id="marca" value="{{ $auto->marca }}">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" name="direccion" id="direccion" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" name="modelo" id="modelo" value="{{ $auto->modelo }}">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" name="telefono" id="telefono" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="año">Año:</label>
-                    <input type="number" name="año" id="año" value="{{ $auto->año }}">
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" name="correo" id="correo" required>
                 </div>
 
+
                 <div class="form-group">
-                    <button type="submit">Actualizar</button>
+                    <button type="submit">Guardar</button>
                 </div>
             </form>
         </div>

@@ -16,4 +16,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('categorias', CategoriaController::class);
 
 Route::resource('autos', App\Http\Controllers\AutoController::class);
+Route::resource('proveedores', App\Http\Controllers\ProveedoresController::class);
 

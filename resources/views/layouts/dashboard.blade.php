@@ -99,6 +99,11 @@
         .text-shadow-black {
             text-shadow: 1px 1px 3px #000;
         }
+        .sidebar a.active {
+            background-color: #8a0707;
+            border-left: 5px solid #ffffff;
+            transform: scale(1.03);
+        }
     </style>
 
     <div class="dashboard-container">
@@ -109,7 +114,7 @@
                 <span class="text-shadow-black">AUTOSTYLE</span>
             </div>
 
-            <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
+            <a href="/home" class="{{ request()->is('inicio*') ? 'active' : '' }}">
                 <i class="fa-solid fa-home me-2 text-shadow-black"></i>
                 <span class="text-shadow-black">INICIO</span>
             </a>
@@ -133,6 +138,11 @@
                 <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                 <span class="text-shadow-black">Autos</span>
             </a>
+            <a href="/personas" class="{{ request()->is('personas') ? 'active' : '' }}">
+                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">Personas</span>
+            </a>
+
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
                 <i class="fa-solid fa-arrow-left me-2 text-shadow-black"></i>

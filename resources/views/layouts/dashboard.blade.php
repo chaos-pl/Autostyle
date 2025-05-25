@@ -138,6 +138,11 @@
                 <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                 <span class="text-shadow-black">Autos</span>
             </a>
+            <a href="/personas" class="{{ request()->is('personas') ? 'active' : '' }}">
+                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">Personas</span>
+            </a>
+
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
                 <i class="fa-solid fa-arrow-left me-2 text-shadow-black"></i>

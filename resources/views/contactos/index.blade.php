@@ -10,12 +10,7 @@
 
         <h2 class="fw-bold mb-4" style="color: #cc0000; text-shadow: 1px 1px 0 #000;">Lista de Contactos</h2>
 
-        {{-- Ya no se permite crear nuevos contactos manualmente --}}
-        {{-- 
-        <a href="{{ route('contactos.create') }}" class="btn btn-danger mb-4" style="border-radius: 10px; font-weight: bold;">
-            <i class="fa fa-plus me-1"></i> Crear nuevo contacto
-        </a> 
-        --}}
+       
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach($contactos as $contacto)

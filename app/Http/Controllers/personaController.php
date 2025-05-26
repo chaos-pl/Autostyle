@@ -7,26 +7,18 @@ use App\Models\Persona;
 
 class personaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $personas = Persona::all();
         return view('personas.index', compact('personas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('personas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
 {
     $request->validate([
@@ -51,27 +43,18 @@ class personaController extends Controller
 
     return redirect()->route('personas.index')->with('success', 'Persona creada exitosamente.');
 }
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         $persona = Persona::findOrFail($id);
         return view('personas.show', compact('persona'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $persona = Persona::findOrFail($id);
         return view('personas.edit', compact('persona'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
 {
     $request->validate([
@@ -79,13 +62,13 @@ class personaController extends Controller
         'apellido_paterno' => 'nullable|string|max:100',
         'apellido_materno' => 'nullable|string|max:100',
         'correo' => 'nullable|email|max:191',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // valida imagen opcional
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', opcional
         'tipo' => 'required|in:empleado,cliente,usuario',
     ]);
 
     $persona = Persona::findOrFail($id);
 
-    // Si se subió archivo, guardarlo y actualizar la ruta
+   
     if ($request->hasFile('foto')) {
         $file = $request->file('foto');
         $filename = time() . '_' . $file->getClientOriginalName();
@@ -93,7 +76,7 @@ class personaController extends Controller
         $persona->foto = 'uploads/' . $filename;
     }
 
-    // Actualiza los demás campos excepto la foto que ya manejamos
+  
     $persona->nombre = $request->nombre;
     $persona->apellido_paterno = $request->apellido_paterno;
     $persona->apellido_materno = $request->apellido_materno;
@@ -105,9 +88,7 @@ class personaController extends Controller
     return redirect()->route('personas.index')->with('success', 'Persona actualizada exitosamente.');
 }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
     {
         $persona = Persona::findOrFail($id);

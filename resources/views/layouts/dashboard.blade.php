@@ -121,19 +121,19 @@
             </a>
             <a href="/productos" class="{{ request()->is('productos') ? 'active' : '' }}">
                 <i class="fa-solid fa-box me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">PRODUCTOS</span>
+                <span class="text-shadow-black">Productos</span>
             </a>
             <a href="/empleados" class="{{ request()->is('empleados') ? 'active' : '' }}">
                 <i class="fa-solid fa-users me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">EMPLEADOS</span>
+                <span class="text-shadow-black">Empleados</span>
             </a>
             <a href="/proveedores" class="{{ request()->is('proveedores') ? 'active' : '' }}">
                 <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">PROVEEDORES</span>
+                <span class="text-shadow-black">Proveedores</span>
             </a>
             <a href="{{ route('categorias.index') }}" class="{{ request()->is('categorias') ? 'active' : '' }}">
                 <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">CATEGORÍAS</span>
+                <span class="text-shadow-black">Categorías</span>
             </a>
             <a href="/autos" class="{{ request()->is('autos') ? 'active' : '' }}">
                 <i class="fa-solid fa-car me-2 text-shadow-black"></i>

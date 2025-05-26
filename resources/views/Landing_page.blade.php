@@ -264,14 +264,11 @@
     <section id="contacto" class="container my-5">
         <h2 class="text-center fw-bold bebas" style="color: #e60000;">Contacto</h2>
 
-        {{-- Mensaje de éxito --}}
         @if(session('success'))
             <div class="alert alert-success text-center">
                 {{ session('success') }}
             </div>
         @endif
-
-        {{-- Mensajes de error --}}
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul class="mb-0">

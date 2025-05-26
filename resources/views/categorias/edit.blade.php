@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('content')
+@section('dashboard-content')
     <style>
         @font-face {
             font-family: 'Bebas Neue';

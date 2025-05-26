@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use Illuminate\Http\Request;
+use App\Models\persona;
 
 class EmpleadoController extends Controller
 {
@@ -13,6 +14,8 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
+        $empleados = Empleado::with('persona')->latest()->paginate(6);
+        return view('empleados.index', compact('empleados'));
     }
 
     /**
@@ -21,6 +24,8 @@ class EmpleadoController extends Controller
     public function create()
     {
         //
+        $personas = Persona::all();
+        return view('empleados.create', compact('personas'));
     }
 
     /**
@@ -29,6 +34,15 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'persona_id' => 'required|exists:personas,id',
+        ]);
+
+        Empleado::create([
+            'persona_id' => $request->persona_id,
+        ]);
+
+        return redirect()->route('empleados.index')->with('success', 'Empleado creado correctamente.');
     }
 
     /**
@@ -45,6 +59,8 @@ class EmpleadoController extends Controller
     public function edit(Empleado $empleado)
     {
         //
+        $personas = Persona::all();
+        return view('empleados.edit', compact('empleado', 'personas'));
     }
 
     /**
@@ -53,6 +69,15 @@ class EmpleadoController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
         //
+        $request->validate([
+            'persona_id' => 'required|exists:personas,id',
+        ]);
+
+        $empleado->update([
+            'persona_id' => $request->persona_id,
+        ]);
+
+        return redirect()->route('empleados.index')->with('success', 'Empleado actualizado correctamente.');
     }
 
     /**
@@ -61,5 +86,8 @@ class EmpleadoController extends Controller
     public function destroy(Empleado $empleado)
     {
         //
+        $empleado->delete();
+
+        return redirect()->route('empleados.index')->with('success', 'Empleado eliminado correctamente.');
     }
 }

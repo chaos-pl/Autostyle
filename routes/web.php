@@ -16,6 +16,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('categorias', CategoriaController::class);
 
 Route::resource('autos', App\Http\Controllers\AutoController::class);
-Route::resource('proveedores', App\Http\Controllers\ProveedoresController::class);
+Route::resource('proveedores', App\Http\Controllers\ProveedoresController::class)
+    ->parameters(['proveedores' => 'proveedor']);
+
 Route::resource('personas', App\Http\Controllers\personaController::class);
+Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
+
 

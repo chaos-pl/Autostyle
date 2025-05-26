@@ -33,6 +33,28 @@
             border-radius: 20px;
         }
 
+        .sidebar .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar .brand img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .sidebar .brand span {
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px #000;
+        }
+
         .sidebar a {
             color: #fff;
             text-decoration: none;
@@ -48,6 +70,16 @@
             border-left: 5px solid #fff;
             background-color: #8a0707;
             transform: scale(1.03);
+        }
+
+        .sidebar a.active {
+            background-color: #8a0707;
+            border-left: 5px solid #ffffff;
+            transform: scale(1.03);
+        }
+
+        .text-shadow-black {
+            text-shadow: 1px 1px 3px #000;
         }
 
         .content {
@@ -73,37 +105,6 @@
             background-color: #8a0707;
             border-radius: 10px;
         }
-
-        .sidebar .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .sidebar .brand img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-
-        .sidebar .brand span {
-            font-size: 1.8rem;
-            color: #fff;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 3px #000;
-        }
-
-        .text-shadow-black {
-            text-shadow: 1px 1px 3px #000;
-        }
-        .sidebar a.active {
-            background-color: #8a0707;
-            border-left: 5px solid #ffffff;
-            transform: scale(1.03);
-        }
     </style>
 
     <div class="dashboard-container">
@@ -114,7 +115,7 @@
                 <span class="text-shadow-black">AUTOSTYLE</span>
             </div>
 
-            <a href="/home" class="{{ request()->is('inicio*') ? 'active' : '' }}">
+            <a href="{{ route('home') }}" class="{{ request()->is('home') ? 'active' : '' }}">
                 <i class="fa-solid fa-home me-2 text-shadow-black"></i>
                 <span class="text-shadow-black">INICIO</span>
             </a>
@@ -135,24 +136,24 @@
                 <span class="text-shadow-black">CATEGORÍAS</span>
             </a>
             <a href="/autos" class="{{ request()->is('autos') ? 'active' : '' }}">
-                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">Autos</span>
+                <i class="fa-solid fa-car me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">AUTOS</span>
             </a>
             <a href="/personas" class="{{ request()->is('personas') ? 'active' : '' }}">
-                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">Personas</span>
+                <i class="fa-solid fa-user me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">PERSONAS</span>
             </a>
             <a href="{{ route('clientes.index') }}" class="{{ request()->is('clientes') ? 'active' : '' }}">
-                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">Clientes</span>
+                <i class="fa-solid fa-address-book me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">CLIENTES</span>
             </a>
             <a href="{{ route('producto_proveedor.index') }}" class="{{ request()->is('producto_proveedor') ? 'active' : '' }}">
                 <i class="fa-solid fa-link me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">Producto-Proveedor</span>
+                <span class="text-shadow-black">PRODUCTO-PROVEEDOR</span>
             </a>
             <a href="{{ route('contactos.index') }}" class="{{ request()->is('contactos') ? 'active' : '' }}">
-                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">Contactos</span>
+                <i class="fa-solid fa-envelope me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">CONTACTOS</span>
             </a>
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">

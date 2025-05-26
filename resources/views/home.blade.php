@@ -1,211 +1,98 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('content')
+@section('dashboard-content')
     <style>
         @font-face {
             font-family: 'Bebas Neue';
             src: url('{{ asset('fonts/bebasneue/BebasNeue-Regular.ttf') }}') format('truetype');
-            font-weight: normal;
-            font-style: normal;
         }
-
-        .sidebar a.active {
-            background-color: #8a0707;
-            border-left: 5px solid #ffffff;
-            transform: scale(1.03);
-        }
-
 
         html, body {
-            height: 100%;
-            margin: 0;
-            background-color: #ffffff;
             font-family: 'Bebas Neue', sans-serif;
-        }
-
-        .text-shadow-black {
-            text-shadow: 1px 1px 3px #000;
-        }
-
-        .dashboard-container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            padding: 20px;
-            gap: 20px;
-            box-sizing: border-box;
-        }
-
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(to bottom, #cc0000, #800000);
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            border-radius: 20px;
-        }
-
-        .sidebar a {
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            padding: 15px 10px;
-            font-weight: bold;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar a:hover {
-            border-left: 5px solid #fff;
-            background-color: #8a0707;
-            transform: scale(1.03);
+            background-color: #fff;
         }
 
         .content {
-            flex-grow: 1;
             padding: 40px;
-            overflow-y: auto;
             background-color: #fff;
-            color: #e60000;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-
-        .stats-panel {
-            width: 300px;
-            background: linear-gradient(to bottom, #cc0000, #800000);
-            color: #fff;
-            padding: 20px;
-            border-radius: 20px;
-        }
-
-        .stats-panel h4 {
-            border-bottom: 2px solid #fff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 3px #000;
-        }
-
-        .stat-item {
-            margin-bottom: 15px;
-            padding: 15px;
-            background-color: #8a0707;
-            border-radius: 10px;
             text-align: center;
         }
 
-        .sidebar .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .content h2 {
+            color: #cc0000;
+            text-shadow: 1px 1px 0 #000;
             margin-bottom: 30px;
-            transition: all 0.3s ease;
         }
 
-        .sidebar .brand:hover {
-            transform: scale(1.03);
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
         }
 
-        .sidebar .brand img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-
-        .sidebar .brand span {
-            font-size: 1.8rem;
+        .card-stat {
+            background: linear-gradient(to bottom, #cc0000, #800000);
             color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            width: 240px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .card-stat:hover {
+            transform: scale(1.05);
+        }
+
+        .card-stat i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .card-stat h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .card-stat p {
+            font-size: 28px;
             font-weight: bold;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 3px #000;
+            margin: 0;
         }
     </style>
 
-    <div class="dashboard-container">
-        <div class="sidebar d-flex flex-column">
-            <div class="brand">
-                <img src="{{ asset('img/logo_autostyle.jpeg') }}" alt="Logo">
-                <span class="text-shadow-black">AUTOSTYLE</span>
+    <div class="content">
+        <h2 class="fw-bold">Bienvenido al Dashboard</h2>
+
+        <div class="stats-grid">
+            <div class="card-stat">
+                <i class="fa-solid fa-box"></i>
+                <h3>Productos</h3>
+                <p>{{ $totalProductos }}</p>
             </div>
 
-            <div>
-                <a href="/home" class="{{ request()->is('inicio') ? 'active' : '' }}">
-                    <i class="fa-solid fa-home me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">INICIO</span>
-                </a>
-                <a href="{{ route('productos.index') }}" class="{{ request()->is('productos') ? 'active' : '' }}">
-                    <i class="fa-solid fa-box me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">PRODUCTOS</span>
-                </a>
-                <a href="{{ route('empleados.index') }}" class="{{ request()->is('empleados') ? 'active' : '' }}">
-                    <i class="fa-solid fa-users me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">EMPLEADOS</span>
-                </a>
-                <a href="/proveedores" class="{{ request()->is('proveedores') ? 'active' : '' }}">
-                    <i class="fa-solid fa-truck me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">PROVEEDORES</span>
-                </a>
-                <a href="{{ route('categorias.index') }}" class="{{ request()->is('categorias') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">CATEGORÍAS</span>
-                </a>
-                <a href="/autos" class="{{ request()->is('autos*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                    <span class="text-shadow-black">Autos</span>
-                </a>
-                <a href="/personas" class="{{ request()->is('personas') ? 'active' : '' }}">
-                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">Personas</span>
-                </a>
-                <a href="{{ route('contactos.index') }}" class="{{ request()->is('contactos') ? 'active' : '' }}">
-                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">Contactos</span>
-            </a>
-
+            <div class="card-stat">
+                <i class="fa-solid fa-user-check"></i>
+                <h3>Clientes</h3>
+                <p>{{ $totalClientes }}</p>
             </div>
 
-            <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
-                <i class="fa-solid fa-arrow-left me-2 text-shadow-black"></i>
-                <span class="text-shadow-black">SALIR</span>
-            </a>
-        </div>
-
-        <div class="content">
-            <h2 class="fw-bold ">Bienvenido al Dashboard</h2>
-            <p>Contenido de la vista actual...</p>
-        </div>
-
-
-        <!-- PANEL DE ESTADÍSTICAS -->
-        <div class="stats-panel">
-            <h4 class="text-shadow-black">Estadísticas</h4>
-
-            <div class="stat-item d-flex align-items-center gap-3">
-                <i class="fa-solid fa-sack-dollar fa-2x text-white text-shadow-black"></i>
-                <div>
-                    <h5 class="mb-0 text-white text-shadow-black">Ventas Totales</h5>
-                    <p class="mb-0 text-white text-shadow-black">$75,000</p>
-                </div>
+            <div class="card-stat">
+                <i class="fa-solid fa-users"></i>
+                <h3>Empleados</h3>
+                <p>{{ $totalEmpleados }}</p>
             </div>
 
-            <div class="stat-item d-flex align-items-center gap-3">
-                <i class="fa-solid fa-warehouse fa-2x text-white text-shadow-black"></i>
-                <div>
-                    <h5 class="mb-0 text-white text-shadow-black">Almacén</h5>
-                    <p class="mb-0 text-white text-shadow-black">65%</p>
-                </div>
-            </div>
-
-            <div class="stat-item d-flex align-items-center gap-3">
-                <i class="fa-solid fa-user-check fa-2x text-white text-shadow-black"></i>
-                <div>
-                    <h5 class="mb-0 text-white text-shadow-black">Clientes Activos</h5>
-                    <p class="mb-0 text-white text-shadow-black">1,230</p>
-                </div>
+            <div class="card-stat">
+                <i class="fa-solid fa-truck"></i>
+                <h3>Proveedores</h3>
+                <p>{{ $totalProveedores }}</p>
             </div>
         </div>
     </div>

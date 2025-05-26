@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('Landing_page');
 });
+use App\Http\Controllers\LandingController;
+
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+
 
 
 Auth::routes();
@@ -29,5 +33,8 @@ use App\Http\Controllers\ContactoController;
 
 Route::resource('producto_proveedor', ProductoProveedorController::class);
 Route::resource('contactos', ContactoController::class);
+use App\Http\Controllers\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 

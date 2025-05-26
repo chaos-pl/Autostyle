@@ -42,6 +42,76 @@
         }
 
         .card-img-top {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            margin: auto;
+        }
+
+        .categoria-separador {
+            border: none;
+            border-top: 4px dashed #cc0000;
+            margin: 60px 0 30px;
+            width: 100%;
+            opacity: 1;
+        }
+
+        .carousel-item {
+            height: 60vh;
+            min-height: 300px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .carousel-caption {
+            background-color: rgba(0,0,0,0.5);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            bottom: 20%;
+        }
+    </style>
+    <style>
+        @font-face {
+            font-family: 'Bebas Neue';
+            src: url('{{ asset('fonts/bebasneue/BebasNeue-Regular.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #e60000;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .bebas {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .btn-custom {
+            background-color: #000;
+            color: #cc0000;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #333;
+        }
+
+        .btn-buscar {
+            background-color: #cc0000;
+            color: white;
+            border: none;
+        }
+
+        .btn-buscar:hover {
+            background-color: #a80000;
+        }
+
+        .card-img-top {
             width: 300px;
             height: 250px;
             object-fit: cover;
@@ -100,9 +170,7 @@
                     <a href="#" class="text-decoration-none me-4" style="color: #ffffff;" data-bs-toggle="modal" data-bs-target="#horariosModal">
                         <i class="fa-solid fa-clock me-1"></i> Horarios
                     </a>
-                    <a href="#carrito" class="text-decoration-none" style="color: #ffffff;">
-                        <i class="fa-solid fa-cart-shopping fa-lg me-1"></i> Carrito
-                    </a>
+
                 </div>
 
             </div>
@@ -148,6 +216,49 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Siguiente</span>
         </button>
+    </section>
+
+    <section id="categorias" class="container my-5">
+        <h2 class="text-center fw-bold bebas mb-5" style="color: #e60000;">Categorías de Productos</h2>
+
+        @foreach($categorias as $categoria)
+            {{-- Separador decorativo entre categorías --}}
+            <hr class="categoria-separador">
+
+            <div class="mb-5">
+                <h3 class="fw-bold bebas mb-4 text-uppercase" style="color: #cc0000;">{{ $categoria->nombre }}</h3>
+
+                @if($categoria->productos->count())
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+                        @foreach($categoria->productos as $producto)
+                            <div class="col">
+                                <div class="card h-100 shadow-sm">
+                                    {{-- Imagen del producto --}}
+                                    <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
+
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title bebas">{{ $producto->nombre }}</h5>
+
+                                        {{-- Botón para mostrar detalles --}}
+                                        <button class="btn btn-buscar mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#infoProducto{{ $producto->id }}">
+                                            Ver más
+                                        </button>
+
+                                        {{-- Sección oculta con precio y descripción --}}
+                                        <div class="collapse mt-3" id="infoProducto{{ $producto->id }}">
+                                            <p><strong>Precio:</strong> ${{ number_format($producto->precio, 2) }}</p>
+                                            <p><strong>Descripción:</strong> {{ $producto->descripcion }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-muted">No hay productos en esta categoría.</p>
+                @endif
+            </div>
+        @endforeach
     </section>
 
     <section id="contacto" class="container my-5">

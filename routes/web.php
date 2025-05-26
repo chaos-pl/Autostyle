@@ -23,4 +23,4 @@ Route::resource('personas', App\Http\Controllers\personaController::class);
 Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
 Route::resource('productos', App\Http\Controllers\ProductoController::class);
 
-
+Route::resource('clientes', App\Http\Controllers\ClienteController::class);

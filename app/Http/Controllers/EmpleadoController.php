@@ -24,8 +24,7 @@ class EmpleadoController extends Controller
     public function create()
     {
         //
-        $personas = Persona::all();
-        return view('empleados.create', compact('personas'));
+
     }
 
     /**

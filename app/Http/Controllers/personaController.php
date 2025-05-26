@@ -62,13 +62,13 @@ class personaController extends Controller
         'apellido_paterno' => 'nullable|string|max:100',
         'apellido_materno' => 'nullable|string|max:100',
         'correo' => 'nullable|email|max:191',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', opcional
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'tipo' => 'required|in:empleado,cliente,usuario',
     ]);
 
     $persona = Persona::findOrFail($id);
 
-   
+
     if ($request->hasFile('foto')) {
         $file = $request->file('foto');
         $filename = time() . '_' . $file->getClientOriginalName();
@@ -76,7 +76,7 @@ class personaController extends Controller
         $persona->foto = 'uploads/' . $filename;
     }
 
-  
+
     $persona->nombre = $request->nombre;
     $persona->apellido_paterno = $request->apellido_paterno;
     $persona->apellido_materno = $request->apellido_materno;
@@ -88,7 +88,7 @@ class personaController extends Controller
     return redirect()->route('personas.index')->with('success', 'Persona actualizada exitosamente.');
 }
 
-    
+
     public function destroy(string $id)
     {
         $persona = Persona::findOrFail($id);

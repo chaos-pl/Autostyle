@@ -9,7 +9,7 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $categorias = Categoria::with('productos')->get(); // Carga categorías con productos relacionados
+        $categorias = Categoria::with('productos')->get();
         return view('landing_page', compact('categorias'));
     }
 }

@@ -21,5 +21,5 @@ Route::resource('proveedores', App\Http\Controllers\ProveedoresController::class
 
 Route::resource('personas', App\Http\Controllers\personaController::class);
 Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
-Route::resource('clientes', App\Http\Controllers\ClienteController::class);
+
 

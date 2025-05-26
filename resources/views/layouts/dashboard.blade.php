@@ -150,7 +150,10 @@
                 <i class="fa-solid fa-link me-2 text-shadow-black"></i>
                 <span class="text-shadow-black">Producto-Proveedor</span>
             </a>
-
+            <a href="{{ route('contactos.index') }}" class="{{ request()->is('contactos') ? 'active' : '' }}">
+                <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">Contactos</span>
+            </a>
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">
                 <i class="fa-solid fa-arrow-left me-2 text-shadow-black"></i>

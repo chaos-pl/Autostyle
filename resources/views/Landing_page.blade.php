@@ -152,18 +152,42 @@
 
     <section id="contacto" class="container my-5">
         <h2 class="text-center fw-bold bebas" style="color: #e60000;">Contacto</h2>
-        <form>
+
+        {{-- Mensaje de éxito --}}
+        @if(session('success'))
+            <div class="alert alert-success text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        {{-- Mensajes de error --}}
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('contactos.store') }}" method="POST">
+            @csrf
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" required>
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono (opcional)</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" value="{{ old('telefono') }}">
             </div>
             <div class="mb-3">
                 <label for="mensaje" class="form-label">Mensaje</label>
-                <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required>{{ old('mensaje') }}</textarea>
             </div>
             <button type="submit" class="btn btn-custom bebas">Enviar</button>
         </form>

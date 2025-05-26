@@ -137,11 +137,11 @@
                     <i class="fa-solid fa-home me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">INICIO</span>
                 </a>
-                <a href="/productos" class="{{ request()->is('productos') ? 'active' : '' }}">
+                <a href="{{ route('productos.index') }}" class="{{ request()->is('productos') ? 'active' : '' }}">
                     <i class="fa-solid fa-box me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">PRODUCTOS</span>
                 </a>
-                <a href="/empleados/index.blade" class="{{ request()->is('empleados') ? 'active' : '' }}">
+                <a href="{{ route('empleados.index') }}" class="{{ request()->is('empleados') ? 'active' : '' }}">
                     <i class="fa-solid fa-users me-2 text-shadow-black"></i>
                     <span class="text-shadow-black">EMPLEADOS</span>
                 </a>

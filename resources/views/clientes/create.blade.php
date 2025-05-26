@@ -1,35 +1,33 @@
 @extends('layouts.dashboard')
 
 @section('dashboard-content')
-    <div class="container">
-        <h2 class="mb-4" style="color: #cc0000;">Crear nuevo cliente</h2>
+    <div class="content">
+        <h2 class="fw-bold mb-4" style="color: #cc0000; text-shadow: 1px 1px 0 #000;">Crear Cliente</h2>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form action="{{ route('clientes.store') }}" method="POST">
+        <form action="{{ route('clientes.store') }}" method="POST"
+              style="background: #fff; padding: 30px; border-radius: 20px; border: 2px solid #cc0000;">
             @csrf
 
-            <div class="mb-3">
-                <label for="id_persona" class="form-label">Seleccionar persona</label>
-                <select name="id_persona" class="form-control" required>
-                    <option value="">-- Selecciona una persona --</option>
+            <div class="mb-4">
+                <label for="persona_id" class="form-label fw-bold" style="color: #cc0000;">Seleccionar Persona:</label>
+                <select name="persona_id" id="persona_id" class="form-select" style="border-radius: 10px;" required>
+                    <option value="">Seleccione una persona</option>
                     @foreach($personas as $persona)
                         <option value="{{ $persona->id }}">{{ $persona->nombre }}</option>
                     @endforeach
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-success">Guardar cliente</button>
-            <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Cancelar</a>
+            <div class="mb-4">
+                <label for="direccion" class="form-label fw-bold" style="color: #cc0000;">Dirección:</label>
+                <input type="text" name="direccion" id="direccion" class="form-control" style="border-radius: 10px;" placeholder="Ingrese la dirección del cliente">
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-danger px-4 py-2" style="border-radius: 10px; font-weight: bold;">
+                    <i class="fa fa-save me-1"></i> Guardar
+                </button>
+            </div>
         </form>
     </div>
 @endsection
-

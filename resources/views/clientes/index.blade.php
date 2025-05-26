@@ -11,9 +11,8 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach($clientes as $cliente)
                 <div class="col">
-                    <div class="p-3" style="background-color: #f8f8f8; border: 2px solid #cc0000; border-radius: 20px;">
+                    <div class="p-3" style="background-color: #f8f8f8; border: 2px solid #cc0000; border-radius: 20px; color: #000;">
 
-                        {{-- Mostrar la foto de la persona --}}
                         @if($cliente->persona && $cliente->persona->foto)
                             <img src="{{ asset($cliente->persona->foto) }}" alt="Foto de {{ $cliente->persona->nombre }}"
                                  style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px;">
@@ -21,10 +20,10 @@
                             <p class="text-muted"><em>Sin foto</em></p>
                         @endif
 
-                        <p><strong>ID:</strong> {{ $cliente->id }}</p>
-                        <p><strong>Nombre:</strong> {{ $cliente->persona->nombre ?? 'No asignado' }}</p>
-                        <p><strong>Correo:</strong> {{ $cliente->persona->correo ?? 'N/A' }}</p>
-                        <p><strong>Teléfono:</strong> {{ $cliente->persona->telefono ?? 'N/A' }}</p>
+                        <p><strong style="color: red">ID:</strong> {{ $cliente->id }}</p>
+                        <p><strong style="color: red">Persona:</strong> {{ $cliente->persona->nombre ?? 'No asignado' }}</p>
+                        <p><strong style="color: red">Correo:</strong> {{ $cliente->persona->correo ?? 'N/A' }}</p>
+                        <p><strong style="color: red">Dirección:</strong> {{ $cliente->direccion ?? 'N/A' }}</p>
 
                         <div class="d-flex justify-content-between mt-3">
                             <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-warning btn-sm" style="border-radius: 8px;">

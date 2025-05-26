@@ -146,6 +146,10 @@
                 <i class="fa-solid fa-tags me-2 text-shadow-black"></i>
                 <span class="text-shadow-black">Clientes</span>
             </a>
+            <a href="{{ route('producto_proveedor.index') }}" class="{{ request()->is('producto_proveedor') ? 'active' : '' }}">
+                <i class="fa-solid fa-link me-2 text-shadow-black"></i>
+                <span class="text-shadow-black">Producto-Proveedor</span>
+            </a>
 
 
             <a href="/" class="logout mt-auto {{ request()->is('landing_page') ? 'active' : '' }}">

@@ -8,13 +8,12 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-
     public function index()
     {
-        $clientes = Cliente::with('persona')->paginate(6);
+        $clientes = Cliente::with('persona')->latest()->paginate(6);
         return view('clientes.index', compact('clientes'));
-    }
 
+    }
 
     public function create()
     {
@@ -22,25 +21,20 @@ class ClienteController extends Controller
         return view('clientes.create', compact('personas'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
-            'id_persona' => 'required|exists:personas,id',
+            'persona_id' => 'required|exists:personas,id',
+            'direccion' => 'nullable|string|max:255',
         ]);
 
-        Cliente::create($request->all());
+        Cliente::create([
+            'persona_id' => $request->persona_id,
+            'direccion' => $request->direccion,
+        ]);
 
-        return redirect()->route('clientes.index')->with('success', 'Cliente creado con éxito.');
+        return redirect()->route('clientes.index')->with('success', 'Cliente creado correctamente.');
     }
-
-
-    public function show(Cliente $cliente)
-    {
-        $cliente->load('persona');
-        return view('clientes.show', compact('cliente'));
-    }
-
 
     public function edit(Cliente $cliente)
     {
@@ -48,18 +42,20 @@ class ClienteController extends Controller
         return view('clientes.edit', compact('cliente', 'personas'));
     }
 
-
     public function update(Request $request, Cliente $cliente)
     {
         $request->validate([
-            'id_persona' => 'required|exists:personas,id',
+            'persona_id' => 'required|exists:personas,id',
+            'direccion' => 'nullable|string|max:255',
         ]);
 
-        $cliente->update($request->all());
+        $cliente->update([
+            'persona_id' => $request->persona_id,
+            'direccion' => $request->direccion,
+        ]);
 
         return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
     }
-
 
     public function destroy(Cliente $cliente)
     {

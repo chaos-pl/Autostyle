@@ -10,10 +10,12 @@
 
         <h2 class="fw-bold mb-4" style="color: #cc0000; text-shadow: 1px 1px 0 #000;">Lista de Contactos</h2>
 
-        {{-- Botón opcional para crear contacto manualmente --}}
-        {{-- <a href="{{ route('contactos.create') }}" class="btn btn-danger mb-4" style="border-radius: 10px; font-weight: bold;">
+        {{-- Ya no se permite crear nuevos contactos manualmente --}}
+        {{-- 
+        <a href="{{ route('contactos.create') }}" class="btn btn-danger mb-4" style="border-radius: 10px; font-weight: bold;">
             <i class="fa fa-plus me-1"></i> Crear nuevo contacto
-        </a> --}}
+        </a> 
+        --}}
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach($contactos as $contacto)
@@ -23,21 +25,15 @@
                         <p><strong>Email:</strong> <span class="text-black-only">{{ $contacto->email }}</span></p>
                         <p><strong>Teléfono:</strong> <span class="text-black-only">{{ $contacto->telefono ?? 'N/A' }}</span></p>
                         <p><strong>Mensaje:</strong> <span class="text-black-only">{{ $contacto->mensaje }}</span></p>
-                        <p><strong>Fecha:</strong> <span class="text-black-only">{{ $contacto->fecha->format('d/m/Y H:i') }}</span></p>
-                        <p><strong>Estado:</strong> 
-                            <span class="badge 
-                                @if($contacto->estado == 'pendiente') bg-warning
-                                @elseif($contacto->estado == 'leido') bg-primary
-                                @elseif($contacto->estado == 'respondido') bg-success
-                                @endif
-                            ">
-                                {{ ucfirst($contacto->estado) }}
+                        <p><strong>Fecha:</strong> 
+                            <span class="text-black-only">
+                                {{ \Carbon\Carbon::parse($contacto->fecha)->format('d/m/Y H:i') }}
                             </span>
                         </p>
 
                         <div class="d-flex justify-content-between mt-3">
                             <a href="{{ route('contactos.edit', $contacto) }}" class="btn btn-warning btn-sm" style="border-radius: 8px;">
-                                <i class="fa fa-edit"></i> Cambiar estado
+                                <i class="fa fa-edit"></i> Editar
                             </a>
 
                             <form action="{{ route('contactos.destroy', $contacto) }}" method="POST" onsubmit="return confirm('¿Deseas eliminar este contacto?');">
